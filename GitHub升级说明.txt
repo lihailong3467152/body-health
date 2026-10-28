@@ -1,0 +1,23 @@
+身体觉察记录系统 V3.0 — GitHub Pages 原仓库更新说明
+
+【本压缩包仅包含应替换的5个运行文件】
+1. index.html
+2. app.js
+3. styles.css
+4. sw.js
+5. config.js（先修改后再上传）
+
+第一步：打开 config.js，保留你原来的 Supabase Project URL 和 publishable / anon key。设置 requireLogin: true；允许自己注册则 allowSignup: true。
+          绝不填写 sb_secret_、service_role、数据库密码或个人密码。
+
+第二步：登录 GitHub，进入原来已经发布的仓库和发布分支（通常 main）。将上面5个文件上传到网站发布目录（常见是仓库根目录；如果 Pages 来源选 /docs，上传到 /docs 内），覆盖同名文件并提交。
+          不要上传 zip 文件本身；不要新建子文件夹。
+
+第三步：Supabase 控制台 Authentication > Sign In / Providers > Email 确保启用 Email；如允许自己注册，打开 Allow new users to sign up。
+          注册时首次邮件验证建议开启 Confirm Email；之后每次可以直接用邮箱+密码登录。
+          Authentication > URL Configuration：Site URL 和 Redirect URLs 都要包含真实 GitHub Pages 网站网址，例如 https://USERNAME.github.io/body-awareness/（尾部斜杠）。
+
+第四步：访问原 GitHub Pages 网址，Ctrl+Shift+R / 无痕窗口刷新；打开注册/登录页，用一个新邮箱注册测试后再用第二个账号检查数据隔离。
+
+原项目 V2 的 Supabase 数据表、RLS、历史记录不需要删除、重建或执行新 SQL。
+重要：旧账号如果只使用过魔法链接，且从未设置密码，不要重新注册新邮箱试图找回旧数据，应在仍登录时设置密码，或使用正规密码重置流程（该流程仍需要邮件）。

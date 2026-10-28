@@ -127,13 +127,35 @@
       </section>
 
       <section class="page" id="page-settings" aria-labelledby="settings-title">
-        <div class="page-heading"><span class="page-eyebrow">KEEP YOUR MOMENTS SAFE</span><h1 id="settings-title">登录与数据同步</h1><p id="settings-intro">使用邮箱登录，自己的记录只对自己可见；手机和电脑使用同一账号即可同步。</p></div>
+        <div class="page-heading"><span class="page-eyebrow">KEEP YOUR MOMENTS SAFE</span><h1 id="settings-title">登录与数据同步</h1><p id="settings-intro">注册邮箱账号并设置密码，之后直接输入密码登录；手机电脑记录同步。</p></div>
         <div class="settings-layout"><div class="settings-main">
           <div class="settings-card"><div class="settings-head"><span class="settings-icon">◉</span><div><h2>当前保存方式</h2><p id="mode-description">本机模式：记录保存在当前浏览器中</p></div></div><div class="sync-status" id="sync-status-text">无需账号，打开即用。</div><div class="data-action-row"><button type="button" class="btn btn-secondary" id="export-json">备份为 JSON</button><label class="btn btn-secondary file-button">导入 JSON<input id="import-json" type="file" accept=".json,application/json" hidden /></label><button type="button" class="btn btn-ghost danger-text" id="clear-data">清空当前数据</button></div><p class="minor-note">建议定期导出备份。使用本机模式时，更换浏览器、清理网站数据或使用其他设备，都不会自动带走记录。</p></div>
-          <div class="settings-card"><div class="settings-head"><span class="settings-icon">☁</span><div><h2>开启手机与电脑同步</h2><p>可选功能 · Supabase 免费项目即可起步</p></div></div><div id="site-managed-message" class="setup-guide" hidden><strong>站点已接入云端 · 无需填写数据库配置</strong><p>请使用下方邮箱登录。其他使用者只需要同一个网页网址，不需要配置 Supabase。</p></div><div id="site-setup-guide" class="setup-guide"><strong>首次配置只需三步</strong><ol><li>在 <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">Supabase 控制台</a> 创建项目，并执行下载包里的 <code>supabase.sql</code>。</li><li>在项目设置的 API 页面，复制 <b>Project URL</b> 和 <b>publishable key（或旧版 anon key）</b> 填在下面。</li><li>到 Authentication → URL Configuration 添加你部署的网页地址为允许跳转地址，然后通过邮箱登录。</li></ol></div><form id="cloud-config-form" class="cloud-config-form"><label class="field"><span>Supabase Project URL</span><input id="supabase-url" type="url" placeholder="https://xxxx.supabase.co" inputmode="url" /></label><label class="field"><span>Publishable / anon key（公开客户端密钥）</span><input id="supabase-key" type="text" placeholder="sb_publishable_..." spellcheck="false" /></label><p class="minor-note danger-text"><b>千万不要填写 service_role / secret key。</b> 这里只能使用公开客户端密钥，数据隔离由数据库 RLS 策略提供。</p><button type="submit" class="btn btn-primary">保存云端配置</button></form>
-            <div id="auth-area" class="auth-area"><div id="auth-logged-out"><label class="field"><span>你的登录邮箱</span><input id="auth-email" type="email" placeholder="you@example.com" autocomplete="email" /></label><button type="button" class="btn btn-secondary" id="send-login-link">发送邮箱登录链接</button><p class="minor-note" id="auth-explain">首次登录将创建个人账号；请在不同设备使用同一邮箱。登录邮件中的链接会带你回到本网页。</p></div><div id="auth-logged-in" hidden><div class="signed-in-label">已登录：<strong id="signed-in-email"></strong></div><div class="data-action-row"><button type="button" class="btn btn-secondary" id="sync-now">立即同步</button><button type="button" class="btn btn-secondary" id="import-local-cloud">将本机记录复制到云端</button><button type="button" class="btn btn-ghost" id="sign-out">退出云端账号</button></div><p class="minor-note" id="cloud-count-note"></p></div></div>
+          <div class="settings-card"><div class="settings-head"><span class="settings-icon">☁</span><div><h2>开启手机与电脑同步</h2><p>可选功能 · Supabase 免费项目即可起步</p></div></div><div id="site-managed-message" class="setup-guide" hidden><strong>站点已接入云端 · 无需填写数据库配置</strong><p>请在下方使用账号和密码登录。其他使用者只需要网页地址，不需要配置数据库。</p></div><div id="site-setup-guide" class="setup-guide"><strong>首次配置只需三步</strong><ol><li>在 <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">Supabase 控制台</a> 创建项目，并执行下载包里的 <code>supabase.sql</code>。</li><li>在项目设置的 API 页面，复制 <b>Project URL</b> 和 <b>publishable key（或旧版 anon key）</b> 填在下面。</li><li>在 Authentication → Sign In / Providers 启用 Email，确认注册与邮箱验证策略。账号密码登录平时不需要邮件链接。</li></ol></div><form id="cloud-config-form" class="cloud-config-form"><label class="field"><span>Supabase Project URL</span><input id="supabase-url" type="url" placeholder="https://xxxx.supabase.co" inputmode="url" /></label><label class="field"><span>Publishable / anon key（公开客户端密钥）</span><input id="supabase-key" type="text" placeholder="sb_publishable_..." spellcheck="false" /></label><p class="minor-note danger-text"><b>千万不要填写 service_role / secret key。</b> 这里只能使用公开客户端密钥，数据隔离由数据库 RLS 策略提供。</p><button type="submit" class="btn btn-primary">保存云端配置</button></form>
+            <div id="auth-area" class="auth-area">
+              <div id="auth-logged-out">
+                <div class="auth-tabs" role="group" aria-label="账号操作">
+                  <button id="auth-tab-login" type="button" class="auth-tab active" aria-pressed="true">账号登录</button>
+                  <button id="auth-tab-signup" type="button" class="auth-tab" aria-pressed="false">注册新账号</button>
+                </div>
+                <form id="auth-password-form" class="auth-form">
+                  <label class="field"><span>邮箱账号</span><input id="auth-email" type="email" placeholder="例如 name@example.com" autocomplete="email" maxlength="254" required /></label>
+                  <label class="field"><span>登录密码</span><input id="auth-password" type="password" placeholder="请输入密码（建议不少于12位）" autocomplete="current-password" minlength="8" required /></label>
+                  <label id="auth-confirm-row" class="field" hidden><span>再次输入密码</span><input id="auth-password-confirm" type="password" placeholder="请再次输入相同的密码" autocomplete="new-password" minlength="8" /></label>
+                  <label class="auth-show-password"><input type="checkbox" id="show-auth-password" /> 显示密码</label>
+                  <button type="submit" class="btn btn-primary" id="auth-submit">登录</button>
+                </form>
+                <button type="button" class="auth-forgot" id="forgot-password">忘记密码？通过邮箱找回</button>
+                <p class="minor-note" id="auth-explain">每人用自己的邮箱和密码登录。注册是否需要首次验证邮箱，取决于网站管理员在 Supabase 的设置。</p>
+              </div>
+              <div id="auth-logged-in" hidden>
+                <div class="signed-in-label">已登录：<strong id="signed-in-email"></strong></div>
+                <div class="data-action-row"><button type="button" class="btn btn-secondary" id="sync-now">立即同步</button><button type="button" class="btn btn-secondary" id="import-local-cloud">将本机记录复制到云端</button><button type="button" class="btn btn-ghost" id="sign-out">退出账号</button></div>
+                <details class="password-change"><summary>修改当前账号密码</summary><form id="change-password-form"><label class="field"><span>新密码（至少8位）</span><input id="new-account-password" type="password" autocomplete="new-password" minlength="8" required /></label><button type="submit" class="btn btn-secondary">更新密码</button></form></details>
+                <p class="minor-note" id="cloud-count-note"></p>
+              </div>
+            </div>
           </div>
-        </div><aside class="settings-aside"><div id="two-modes-description" class="info-card"><h3>两种模式有什么区别？</h3><p><strong>本机模式</strong><br />无须注册、可离线使用，但只在本设备的当前浏览器保存。</p><p><strong>云端模式</strong><br />登录后自动同步，同一个邮箱在手机与电脑上可查看同一批记录；断网时暂存到当前设备，恢复网络后再同步。</p></div><div class="info-card"><h3>关于隐私</h3><p>身体感受属于个人敏感记录。请使用自己的账号、私人设备和 HTTPS 网页地址。不要公开分享云端密钥以外的任何敏感配置。</p></div></aside></div>
+        </div><aside class="settings-aside"><div id="two-modes-description" class="info-card"><h3>两种模式有什么区别？</h3><p><strong>本机模式</strong><br />无须注册、可离线使用，但只在本设备的当前浏览器保存。</p><p><strong>云端模式</strong><br />使用同一邮箱账号和密码登录，手机与电脑可查看同一批记录；断网时暂存到当前设备，恢复网络后再同步。</p></div><div class="info-card"><h3>关于隐私</h3><p>身体感受属于个人敏感记录。请使用自己的账号、私人设备和 HTTPS 网页地址。不要公开分享云端密钥以外的任何敏感配置。</p></div></aside></div>
       </section>
     </main>
   </div>
