@@ -41,6 +41,7 @@
           <p>状态记录 <span>·</span> 身体觉察 <span>·</span> 呼吸练习</p>
           <div class="hero-decor" aria-hidden="true">✳</div>
         </div>
+        <div class="guest-hint" id="guest-hint"><span>◉ <strong>免登录即可记录</strong> · 数据先保存在当前浏览器；换设备时再登录同步。</span><button type="button" class="btn btn-secondary guest-sync-cta" data-go="settings">登录并同步 →</button></div>
         <div class="record-layout">
           <form id="entry-form" class="paper-card" autocomplete="off">
             <div class="paper-top">
@@ -127,10 +128,10 @@
       </section>
 
       <section class="page" id="page-settings" aria-labelledby="settings-title">
-        <div class="page-heading"><span class="page-eyebrow">KEEP YOUR MOMENTS SAFE</span><h1 id="settings-title">登录与数据同步</h1><p id="settings-intro">注册邮箱账号并设置密码，之后直接输入密码登录；手机电脑记录同步。</p></div>
+        <div class="page-heading"><span class="page-eyebrow">KEEP YOUR MOMENTS SAFE</span><h1 id="settings-title">登录与数据同步</h1><p id="settings-intro">无需账号就能记录。需要同步到其他手机或电脑时，再登录个人账号。</p></div>
         <div class="settings-layout"><div class="settings-main">
           <div class="settings-card"><div class="settings-head"><span class="settings-icon">◉</span><div><h2>当前保存方式</h2><p id="mode-description">本机模式：记录保存在当前浏览器中</p></div></div><div class="sync-status" id="sync-status-text">无需账号，打开即用。</div><div class="data-action-row"><button type="button" class="btn btn-secondary" id="export-json">备份为 JSON</button><label class="btn btn-secondary file-button">导入 JSON<input id="import-json" type="file" accept=".json,application/json" hidden /></label><button type="button" class="btn btn-ghost danger-text" id="clear-data">清空当前数据</button></div><p class="minor-note">建议定期导出备份。使用本机模式时，更换浏览器、清理网站数据或使用其他设备，都不会自动带走记录。</p></div>
-          <div class="settings-card"><div class="settings-head"><span class="settings-icon">☁</span><div><h2>开启手机与电脑同步</h2><p>可选功能 · Supabase 免费项目即可起步</p></div></div><div id="site-managed-message" class="setup-guide" hidden><strong>站点已接入云端 · 无需填写数据库配置</strong><p>请在下方使用账号和密码登录。其他使用者只需要网页地址，不需要配置数据库。</p></div><div id="site-setup-guide" class="setup-guide"><strong>首次配置只需三步</strong><ol><li>在 <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">Supabase 控制台</a> 创建项目，并执行下载包里的 <code>supabase.sql</code>。</li><li>在项目设置的 API 页面，复制 <b>Project URL</b> 和 <b>publishable key（或旧版 anon key）</b> 填在下面。</li><li>在 Authentication → Sign In / Providers 启用 Email，确认注册与邮箱验证策略。账号密码登录平时不需要邮件链接。</li></ol></div><form id="cloud-config-form" class="cloud-config-form"><label class="field"><span>Supabase Project URL</span><input id="supabase-url" type="url" placeholder="https://xxxx.supabase.co" inputmode="url" /></label><label class="field"><span>Publishable / anon key（公开客户端密钥）</span><input id="supabase-key" type="text" placeholder="sb_publishable_..." spellcheck="false" /></label><p class="minor-note danger-text"><b>千万不要填写 service_role / secret key。</b> 这里只能使用公开客户端密钥，数据隔离由数据库 RLS 策略提供。</p><button type="submit" class="btn btn-primary">保存云端配置</button></form>
+          <div class="settings-card"><div class="settings-head"><span class="settings-icon">☁</span><div><h2>开启手机与电脑同步</h2><p>可选功能 · Supabase 免费项目即可起步</p></div></div><div id="site-managed-message" class="setup-guide" hidden><strong>站点已接入云端 · 无需填写数据库配置</strong><p>游客可直接使用记录功能。需要跨设备同步时，在下方用账号密码登录；其他用户不需要配置数据库。</p></div><div id="site-setup-guide" class="setup-guide"><strong>首次配置只需三步</strong><ol><li>在 <a href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">Supabase 控制台</a> 创建项目，并执行下载包里的 <code>supabase.sql</code>。</li><li>在项目设置的 API 页面，复制 <b>Project URL</b> 和 <b>publishable key（或旧版 anon key）</b> 填在下面。</li><li>在 Authentication → Sign In / Providers 启用 Email，确认注册与邮箱验证策略。账号密码登录平时不需要邮件链接。</li></ol></div><form id="cloud-config-form" class="cloud-config-form"><label class="field"><span>Supabase Project URL</span><input id="supabase-url" type="url" placeholder="https://xxxx.supabase.co" inputmode="url" /></label><label class="field"><span>Publishable / anon key（公开客户端密钥）</span><input id="supabase-key" type="text" placeholder="sb_publishable_..." spellcheck="false" /></label><p class="minor-note danger-text"><b>千万不要填写 service_role / secret key。</b> 这里只能使用公开客户端密钥，数据隔离由数据库 RLS 策略提供。</p><button type="submit" class="btn btn-primary">保存云端配置</button></form>
             <div id="auth-area" class="auth-area">
               <div id="auth-logged-out">
                 <div class="auth-tabs" role="group" aria-label="账号操作">
@@ -149,13 +150,13 @@
               </div>
               <div id="auth-logged-in" hidden>
                 <div class="signed-in-label">已登录：<strong id="signed-in-email"></strong></div>
-                <div class="data-action-row"><button type="button" class="btn btn-secondary" id="sync-now">立即同步</button><button type="button" class="btn btn-secondary" id="import-local-cloud">将本机记录复制到云端</button><button type="button" class="btn btn-ghost" id="sign-out">退出账号</button></div>
+                <div class="data-action-row"><button type="button" class="btn btn-secondary" id="sync-now">立即同步</button><button type="button" class="btn btn-secondary" id="import-local-cloud">合并游客记录到此账号</button><button type="button" class="btn btn-ghost" id="sign-out">退出账号</button></div>
                 <details class="password-change"><summary>修改当前账号密码</summary><form id="change-password-form"><label class="field"><span>新密码（至少8位）</span><input id="new-account-password" type="password" autocomplete="new-password" minlength="8" required /></label><button type="submit" class="btn btn-secondary">更新密码</button></form></details>
                 <p class="minor-note" id="cloud-count-note"></p>
               </div>
             </div>
           </div>
-        </div><aside class="settings-aside"><div id="two-modes-description" class="info-card"><h3>两种模式有什么区别？</h3><p><strong>本机模式</strong><br />无须注册、可离线使用，但只在本设备的当前浏览器保存。</p><p><strong>云端模式</strong><br />使用同一邮箱账号和密码登录，手机与电脑可查看同一批记录；断网时暂存到当前设备，恢复网络后再同步。</p></div><div class="info-card"><h3>关于隐私</h3><p>身体感受属于个人敏感记录。请使用自己的账号、私人设备和 HTTPS 网页地址。不要公开分享云端密钥以外的任何敏感配置。</p></div></aside></div>
+        </div><aside class="settings-aside"><div id="two-modes-description" class="info-card"><h3>两种模式有什么区别？</h3><p><strong>本机模式</strong><br />无须注册，填写后立即保存在当前浏览器。清理浏览器数据可能丢失，建议导出备份。</p><p><strong>云端模式</strong><br />需要时登录；经本人确认把游客记录合并到账号。以后手机与电脑用同一账号可查看云端记录；断网时变更暂存到当前设备，恢复网络后同步。</p></div><div class="info-card"><h3>关于隐私</h3><p>身体感受属于私密记录。游客记录保存在当前浏览器，使用共享设备时其他人可能看见；建议使用私人设备、HTTPS，定期备份。不同账号之间不会自动合并游客记录，必须由当前登录者确认。</p></div></aside></div>
       </section>
     </main>
   </div>

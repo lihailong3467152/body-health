@@ -18,3 +18,8 @@
 .password-change form{margin-top:15px;display:grid;gap:12px;max-width:400px}
 .password-change form>.btn{justify-self:start}
 @media(max-width:760px){.auth-form .btn{width:100%}.auth-tab{padding:11px 8px}}
+
+/* V4 游客模式：在记录首页清楚显示保存范围和同步入口 */
+.guest-hint{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 15px;padding:12px 18px;border:1px solid #d4e5ee;border-radius:13px;background:#f1f8fc;color:#426b83;font-size:12px;line-height:1.7}
+.guest-hint strong{color:#256b90}.guest-hint .btn{white-space:nowrap;padding:9px 13px;font-size:12px}
+@media(max-width:760px){.guest-hint{flex-direction:column;align-items:stretch;padding:13px;margin-bottom:13px}.guest-hint .btn{width:100%;justify-content:center}}
